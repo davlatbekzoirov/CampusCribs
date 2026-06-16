@@ -10,9 +10,10 @@ A comprehensive, full-stack Django web application designed to help students nav
 * **"Instant Noodle" Alerts:** Interactive dashboard warning banners that automatically trigger when spending velocity compromises fixed liabilities like utility quarters or rent chunks.
 
 ### 2. Frictionless Roommate Expense Splitter (`roomieratio`)
-* **Group Ledgers:** Create a unified household environment where roommates log shared apartment responsibilities (Wi-Fi bills, utility splits, collective household supplies).
-* **Simplified Balance Matrix:** Implements an aggregate net calculation logic to track custom itemized shares or symmetric flatmatic debts easily.
-* **Gamified Chore Rotation:** Automates weekly chore wheels (trash, kitchen deep-clean) that rotate tasks and track accountability via photo verification file asset uploads.
+### 2. Frictionless Roommate Expense Splitter (Debt Matrix)
+* **Group Ledgers:** Create a shared household namespace where roommates log shared bills (Wi-Fi, utilities, groceries) with equal or customized splitting dynamics.
+* **The Debt Simplifier (Simplified Matrix):** Implements an optimized transactional algorithm in `utils.py`. The system evaluates the net matrix values across all participants and matches the largest debtors directly with the largest creditors, minimizing the total number of banking transactions required to settle up the household.
+* **Gamified Chore Wheel & Verification:** Dynamically displays active chore responsibilities and provides an asynchronous validation route (`complete_chore`) for uploading localized image proofs to track household accountability.
 * **Karma Ledger:** Earn Karma Points (KP) for verified on-time completions, tracking overall household stats with friendly automated slacker notifications.
 
 ### 3. Housing Search & Sublet CRM Tracker (`housing`)
