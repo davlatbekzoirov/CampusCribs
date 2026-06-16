@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}RoomieRatio Hub | CampusCribs{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">{{ household.name }} Namespace</h1>
+    <span class="badge badge-safety">Invite Code: {{ household.invite_code }}</span>
+</div>
+
+<div class="form-row" style="margin-bottom: 2rem;">
+    <div class="card">
+        <h3 class="card-title">Frictionless Debt Matrix Balance</h3>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            {% for bal in balances %}
+            <div class="flex-between" style="padding:10px; background: rgba(255,255,255,0.02); border-radius:8px;">
+                <span>{{ bal.user.username }}</span>
+                <span class="badge {% if bal.net >= 0 %}badge-safety{% else %}badge-urgent{% endif %}">
+                    {% if bal.net >= 0 %}+{% endif %}${{ bal.net|floatformat:2 }}
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <hr class="divider">
+        
+        <h4 class="form-section-title">Log Group Shared Bill</h4>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="add_expense" value="1">
+            <div class="form-group">
+                <input type="text" name="title" placeholder="Internet or Grocery Bill" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="number" step="0.01" name="total_amount" placeholder="Total Cost" required>
+                </div>
+                <div class="form-group">
+                    <select name="split_type">
+                        <option value="EQUAL">Split Uniformly</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-sm" style="width:100%; justify-content:center;">Submit Expense</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h3 class="card-title">Chore Pipeline & Slacker Accountability</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Chore</th>
+                        <th>Assignee</th>
+                        <th>Points</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for chore in chores %}
+                    <tr>
+                        <td>{{ chore.title }}</td>
+                        <td><strong>{{ chore.assigned_to.username }}</strong></td>
+                        <td>{{ chore.karma_points }} KP</td>
+                        <td>
+                            {% if chore.is_completed %}
+                            <span class="badge badge-graded">Verified Proof</span>
+                            {% else %}
+                            {% if chore.assigned_to == request.user %}
+                            <form method="POST" action="{% url 'roomieratio:complete_chore' chore.id %}" enctype="multipart/form-data" class="gap-2">
+                                {% csrf_token %}
+                                <input type="file" name="proof" style="display:none;" id="file-{{ chore.id }}" onchange="this.form.submit()">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('file-{{ chore.id }}').click()">Upload Proof</button>
+                            </form>
+                            {% else %}
+                            <span class="badge badge-in_progress">Pending Log</span>
+                            {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-muted" style="text-align:center;">All neat! No outstanding chores on rotation.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

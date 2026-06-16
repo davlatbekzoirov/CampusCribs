@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development environment setup
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Database files
+db.sqlite3
+db.sqlite3-journal
+
+# Media storage uploads (User verification assets)
+media/
+chore_proofs/
+
+# IDE / Operating System settings configuration
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
