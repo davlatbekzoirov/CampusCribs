@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Email Verified — CampusCribs{% endblock %}
+{% block content %}
+<div style="max-width:500px;margin:4rem auto;text-align:center">
+  
+  <div style="
+    width:80px;height:80px;
+    background:linear-gradient(135deg,#4CAF50,#66BB6A);
+    border-radius:20px;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 1.5rem;
+    box-shadow:0 6px 20px rgba(76,175,80,.35);
+    font-size:40px;
+  ">✓</div>
+
+  <h1 style="font-size:26px;font-weight:700;margin:0 0 1rem;color:#4CAF50">Email Verified!</h1>
+  <p style="color:#666;font-size:16px;line-height:1.6;margin:0 0 2rem">
+    Your account is now active and ready to use.
+  </p>
+
+  <div class="card" style="
+    border-radius:16px;
+    padding:2rem;
+    box-shadow:0 4px 24px rgba(76,175,80,.1);
+    background:#f1f8f4;
+    margin-bottom:2rem
+  ">
+    <p style="color:#555;font-size:14px;margin:0">
+      Welcome to CampusCribs! You can now log in with your credentials.
+    </p>
+  </div>
+
+  <a href="{% url 'login' %}" style="
+    display:inline-block;
+    background-color:#534AB7;
+    color:white;
+    padding:12px 30px;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+    margin:1rem 0;
+  ">Sign In to Your Account</a>
+
+</div>
+{% endblock %}

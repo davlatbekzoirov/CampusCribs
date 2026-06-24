@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Email Verification — CampusCribs{% endblock %}
+{% block content %}
+<div style="max-width:500px;margin:4rem auto;text-align:center">
+  
+  <div style="
+    width:80px;height:80px;
+    background:linear-gradient(135deg,#534AB7,#7F77DD);
+    border-radius:20px;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 1.5rem;
+    box-shadow:0 6px 20px rgba(83,74,183,.35);
+    font-size:40px;
+  ">✉️</div>
+
+  <h1 style="font-size:26px;font-weight:700;margin:0 0 1rem">Check Your Email</h1>
+  <p style="color:#666;font-size:16px;line-height:1.6;margin:0 0 2rem">
+    We've sent a verification link to <strong style="color:#333">{{ user_email }}</strong>
+  </p>
+
+  <div class="card" style="
+    border-radius:16px;
+    padding:2rem;
+    box-shadow:0 4px 24px rgba(83,74,183,.1);
+    background:#f9f8ff;
+    margin-bottom:2rem
+  ">
+    <p style="color:#888;font-size:14px;margin:0">
+      Click the link in the email to verify your account. <br>
+      <strong>Link expires in 1 hour.</strong>
+    </p>
+  </div>
+
+  <p style="color:#888;font-size:14px;margin:2rem 0">
+    Didn't receive the email? Check your spam folder or try registering again.
+  </p>
+
+  <a href="{% url 'register' %}" style="
+    color:#534AB7;
+    text-decoration:none;
+    font-weight:600;
+    border-bottom:2px solid #534AB7;
+    padding-bottom:2px;
+  ">← Back to Registration</a>
+
+</div>
+{% endblock %}
