@@ -15,23 +15,23 @@ from .utils import send_email_change_code
 
 def register_view(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('budget:dashboard')
     form = RegisterForm(request.POST or None)
     if form.is_valid():
         user = form.save()
         login(request, user)
         messages.success(request, f'Welcome, {user.username}!')
-        return redirect('dashboard')
+        return redirect('budget:dashboard')
     return render(request, 'accounts/auth.html', {'form': form, 'mode': 'register'})
 
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('budget:dashboard')
     form = AuthenticationForm(request, data=request.POST or None)
     if form.is_valid():
         login(request, form.get_user())
-        return redirect(request.GET.get('next', 'dashboard'))
+        return redirect(request.GET.get('next', 'budget:dashboard'))
     return render(request, 'accounts/auth.html', {'form': form, 'mode': 'login'})
 
 
