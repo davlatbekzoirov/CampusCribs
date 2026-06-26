@@ -1,34 +1,86 @@
-# CampusCribs 🏠💰
+# CampusCribs 🏠
 
-A comprehensive, full-stack Django web application designed to help students navigate the financial and logistical complexities of independent living. It combines group expense splitting, co-living chore accountability, sublet/housing search tracking, and student-optimized budgeting into a single, secure hub.
-
-## 🚀 Key Modules & Core Features
-
-### 1. Smart Student Budgeter & "Instant Noodle" Alerts (`budget`)
-* **Student-Centric Ledger:** Track income streams (allowances, part-time jobs, scholarships) against customizable expense categories (textbooks, groceries, social, transport).
-* **Predictive Runway Calculator:** Evaluates daily non-essential spending velocity against remaining semester target countdown milestones to forecast the exact exhaustion date.
-* **"Instant Noodle" Alerts:** Interactive dashboard warning banners that automatically trigger when spending velocity compromises fixed liabilities like utility quarters or rent chunks.
-
-### 2. Frictionless Roommate Expense Splitter (`roomieratio`)
-### 2. Frictionless Roommate Expense Splitter (Debt Matrix)
-* **Group Ledgers:** Create a shared household namespace where roommates log shared bills (Wi-Fi, utilities, groceries) with equal or customized splitting dynamics.
-* **The Debt Simplifier (Simplified Matrix):** Implements an optimized transactional algorithm in `utils.py`. The system evaluates the net matrix values across all participants and matches the largest debtors directly with the largest creditors, minimizing the total number of banking transactions required to settle up the household.
-* **Gamified Chore Wheel & Verification:** Dynamically displays active chore responsibilities and provides an asynchronous validation route (`complete_chore`) for uploading localized image proofs to track household accountability.
-* **Karma Ledger:** Earn Karma Points (KP) for verified on-time completions, tracking overall household stats with friendly automated slacker notifications.
-
-### 3. Housing Search & Sublet CRM Tracker (`housing`)
-* **Kanban Pipeline Board:** Visually progress potential apartment properties through stages from initial detection (`Found`) $\rightarrow$ `Viewing Scheduled` $\rightarrow$ `Applied` $\rightarrow$ `Lease Signed`.
-* **Amenity Scoring System:** Evaluates potential listings based on specific housing criteria, including distance to campus, transit scores, and Wi-Fi speed cap ratings.
+A full-stack Django web application that helps students manage the financial and logistical side of independent living — budgeting, shared expenses, chore tracking, and apartment hunting, all in one place.
 
 ---
 
-## 🛠️ Project Architecture
+## Modules
 
-```text
+### Budget — Personal Ledger & Spending Runway (`budget`)
+
+Track income (allowances, part-time work, scholarships) against categorised expenses (rent, groceries, textbooks, social).
+
+- **Predictive runway calculator** — measures daily non-essential spending velocity over a trailing 14-day window and projects when your balance will run out relative to the semester end date.
+- **"Instant Noodle" alerts** — dashboard warnings that fire when your spending trajectory threatens to undercut fixed costs like rent or utilities before the semester ends.
+
+---
+
+### RoomieRatio — Shared Expenses & Chores (`roomieratio`)
+
+A shared household namespace where roommates log and split bills (Wi-Fi, utilities, groceries).
+
+- **Debt simplifier** — implements a greedy debt-minimisation algorithm in `utils.py`. It nets balances across all members and pairs the largest debtors directly with the largest creditors, reducing the number of transactions needed to settle up.
+- **Chore tracker** — displays active chore assignments with due dates and supports image-proof uploads to mark tasks as complete.
+
+---
+
+### Housing — Apartment Search CRM (`housing`)
+
+A Kanban pipeline for tracking potential rentals through your search process.
+
+- **Four-stage pipeline** — move properties through Found → Viewing Scheduled → Applied → Lease Signed.
+- **Amenity logging** — record campus distance, transit access, rent price, and Wi-Fi capability per listing.
+
+---
+
+### Accounts — Auth & Profiles (`accounts`)
+
+Secure user authentication with email verification.
+
+- Registration with email confirmation (6-digit code, 15-minute expiry)
+- Two-step email change flow with verification code
+- Password change with active session preservation
+- Profile photo upload and display name management
+
+---
+
+## Project Structure
+
+```
 .
-├── accounts       # User Profile Authentication & Registration Logics
-├── budget         # Individual Ledger Ledgering & Predictive Engine
-├── roomieratio    # Shared Group Ledgers, Matrix Metrics, Chore Rotation
-├── housing        # Kanban Prospect CRM Pipeline & Amenity Matrices
-├── core           # Base Project Settings & Master Routing Configuration
-└── templates      # Unified Global Styling Interface Skins
+├── accounts/       # Authentication, profiles, email verification
+├── budget/         # Personal ledger and predictive runway engine
+├── roomieratio/    # Shared expenses, debt simplification, chore rotation
+├── housing/        # Apartment search Kanban pipeline
+├── core/           # Settings and root URL configuration
+└── templates/      # Shared HTML templates
+```
+
+---
+
+## Tech Stack
+
+- **Backend** — Django (Python 3.12)
+- **Database** — SQLite (development)
+- **Auth** — Django's built-in auth extended with email verification flows
+- **Frontend** — Django templates with inline CSS; no JS framework
+
+---
+
+## Getting Started
+
+```bash
+git clone https://github.com/davlatbekzoirov/CampusCribs.git
+cd CampusCribs
+
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+
+pip install -r requirements.txt
+
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+Configure `DEFAULT_FROM_EMAIL` and your email backend in `core/settings.py` before using any verification flows.
